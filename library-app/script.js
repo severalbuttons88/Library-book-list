@@ -37,16 +37,15 @@ function displayBookOnPage(bookList) {
       let authorPara = document.createElement("p");
       let pagesPara = document.createElement("p");
       let readPara = document.createElement("p");
+      readPara.classList.add("read-adjust");
 
       titlePara.textContent = `${book.title}`;
       authorPara.textContent = `Written by ${book.author}`;
       pagesPara.textContent = `Contains ${book.pages} pages`;
       if (book.read === "yes") {
-        readPara.textContent = `You Have Read This Book!`
-
+        readPara.textContent = `You Have Read This Book!`;
       } else if (book.read === "no") {
         readPara.textContent = `You Have Not Read This Book`;
-
       }
       div.append(titlePara);
       div.append(authorPara);
@@ -86,6 +85,8 @@ function formSubmit() {
     );
     displayBookOnPage(myLibrary);
     form.reset();
+    formPopup.classList.remove("form-popup");
+    formPopup.classList.add("form-default");
   });
 }
 showPopUp();
