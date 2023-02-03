@@ -7,6 +7,7 @@ const title = document.querySelector("#title");
 const author = document.querySelector("#author");
 const pages = document.querySelector("#pages");
 const read = document.querySelector("#read");
+
 let submitCounter = -1;
 let titleValue = "";
 let authorValue = "";
@@ -31,13 +32,19 @@ function displayBookOnPage(bookList) {
   bookList.map((book, indexOfArray) => {
     if (indexOfArray === submitCounter) {
       let div = document.createElement("div");
+      div.id = `${indexOfArray}`;
       div.classList.add("card");
+      let delButton = document.createElement("button");
+      delButton.classList.add("delete-button");
       let titlePara = document.createElement("p");
       titlePara.classList.add("card-title");
       let authorPara = document.createElement("p");
       let pagesPara = document.createElement("p");
       let readPara = document.createElement("p");
       readPara.classList.add("read-adjust");
+      delButton.textContent = "Delete This Book";
+      delButton.id = `delete-${indexOfArray}`;
+      deleteButton(delButton);
 
       titlePara.textContent = `${book.title}`;
       authorPara.textContent = `Written by ${book.author}`;
@@ -51,6 +58,7 @@ function displayBookOnPage(bookList) {
       div.append(authorPara);
       div.append(pagesPara);
       div.append(readPara);
+      div.append(delButton);
 
       gridBox.append(div);
     }
@@ -68,7 +76,19 @@ function showPopUp() {
     }
   });
 }
-
+function deleteButton(button) {
+  button.addEventListener("click", () => {
+    let buttonIdString = button.id;
+    buttonIdString = removeCharacters(buttonIdString);
+    let buttonIndexPos = Number(buttonIdString);
+    const divToDelete = document.getElementById(`${buttonIndexPos}`);
+    divToDelete.remove();
+  });
+}
+function removeCharacters(str) {
+  let removed = str.replace(/\D/g,"");
+  return removed;
+}
 function formSubmit() {
   addEventListener("submit", (e) => {
     e.preventDefault();
