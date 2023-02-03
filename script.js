@@ -23,37 +23,38 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
-function addBookToLibrary() {
-  let getInput = prompt("Enter name of book: ");
-  myLibrary.push(getInput);
-}
-
 function displayBookOnPage(bookList) {
   bookList.map((book, indexOfArray) => {
     if (indexOfArray === submitCounter) {
       let div = document.createElement("div");
       div.id = `${indexOfArray}`;
       div.classList.add("card");
+
       let delButton = document.createElement("button");
       delButton.classList.add("delete-button");
+      delButton.textContent = "Delete This Book";
+      delButton.id = `delete-${indexOfArray}`;   //stores index
+      deleteButton(delButton); //Adds event listener to all delete buttons
+
       let titlePara = document.createElement("p");
       titlePara.classList.add("card-title");
+
       let authorPara = document.createElement("p");
       let pagesPara = document.createElement("p");
+
       let readPara = document.createElement("p");
       readPara.classList.add("read-adjust");
-      delButton.textContent = "Delete This Book";
-      delButton.id = `delete-${indexOfArray}`;
-      deleteButton(delButton);
 
       titlePara.textContent = `${book.title}`;
       authorPara.textContent = `Written by ${book.author}`;
       pagesPara.textContent = `Contains ${book.pages} pages`;
+
       if (book.read === "yes") {
         readPara.textContent = `You Have Read This Book!`;
       } else if (book.read === "no") {
         readPara.textContent = `You Have Not Read This Book`;
       }
+
       div.append(titlePara);
       div.append(authorPara);
       div.append(pagesPara);
@@ -66,7 +67,7 @@ function displayBookOnPage(bookList) {
 }
 
 function showPopUp() {
-  bookButton.addEventListener("click", () => {
+  bookButton.addEventListener("click", () => {           //adds and removes visibility class for form
     if (formPopup.classList.contains("form-popup")) {
       formPopup.classList.remove("form-popup");
       formPopup.classList.add("form-default");
@@ -76,7 +77,7 @@ function showPopUp() {
     }
   });
 }
-function deleteButton(button) {
+function deleteButton(button) {                     //gathers id of button being clicked then deletes div associated with it
   button.addEventListener("click", () => {
     let buttonIdString = button.id;
     buttonIdString = removeCharacters(buttonIdString);
@@ -85,11 +86,11 @@ function deleteButton(button) {
     divToDelete.remove();
   });
 }
-function removeCharacters(str) {
-  let removed = str.replace(/\D/g,"");
+function removeCharacters(str) { 
+  let removed = str.replace(/\D/g, "");
   return removed;
 }
-function formSubmit() {
+function formSubmit() {          //form submission without using server
   addEventListener("submit", (e) => {
     e.preventDefault();
     submitCounter += 1;
