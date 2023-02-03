@@ -1,0 +1,51 @@
+.flexContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.cardGrid {
+  width: 50vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-content: center;
+  gap: 20px;
+}
+.card {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+   background-color: antiquewhite;
+   border: 3px solid blue;
+   font-size: 16px;
+
+}
+.card-title {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 1px;
+
+}
+#add-book {
+  color: white;
+  background-color: rgb(9, 95, 224);
+  font-size: 20px;
+  font-weight: bold;
+  height: 50px;
+  width: 200px;
+  position: fixed;
+  top: 25px;
+  left: 40px;
+}
+.form-default {
+  display: none;
+}
+.form-popup {
+    background-color: rgb(16, 111, 219);
+  top: 80px;
+  left: 50px;
+  display: block;
+  position: absolute;
+  color: rgb(209, 255, 244);
+}
+
